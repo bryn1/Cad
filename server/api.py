@@ -186,7 +186,14 @@ def list_formats():
 # GET / — minimal HTML landing (the full drag-drop UI is the separate cad-web
 # frontend module, C8b/server.web.py; this shell just points to the API).
 # --------------------------------------------------------------------------
-_INDEX_HTML = """<!doctype html>
+# GET / serves the cad-web drag-drop UI (server/web.py, C8b). The single-line
+# integration: web.render_index() owns the root; this shell kept /formats and
+# /convert. The hardcoded _INDEX_HTML fallback below is used only if web is absent.
+try:
+    from . import web as _web  # noqa: E402
+    _INDEX_HTML = _web.INDEX_HTML
+except Exception:  # pragma: no cover - web.py optional in minimal installs
+    _INDEX_HTML = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>cad-api</title></head>
 <body><h1>cad-api</h1>
 <p>Convert CAD files (STEP/BREP/IGES) to STEP, BREP, SVG, IGES, STL, OBJ, 3MF, GLTF, PLY.</p>

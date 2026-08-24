@@ -242,16 +242,28 @@ IGES), inte en regression. Se "[Ärligt begränsade]" ovan.
 
 ## Repo-/landningsstatus (per granskning 2026-08-24T0940 UTC)
 
-- Repo: `/srv/workspace/Cad`, gren `main` — **inga commits ännu**; allt untracked.
-  Kod lever i modulmappar under `teddy/` (fas 2: `svarkor-cad-phase2/teddy/`;
-  fas 3 härdning/matrix: `svarkor-cad-phase3/teddy/`; fas-4-fixar som separata
-  leveranser under `svarkor-cad-phase4/teddy/`).
-- DESIGN.md r1 (fas 1) ligger på `/srv/workspace/Cad/bernie/DESIGN.md`.
-- Denna README beskriver koden som den landat — när integratorn monterat trädet
-  ska texten flyttas till repots kanoniska hem `README.md` och ersätta de
-  tidigare versionerna (422.24, 494.6). De fas-4-restale-dokumenten
-  (`530.5-hardening-doc-restale-…`, `530.5-matrix-restale-…`) ska tas in
-  tillsammans med denna.
+- Repo: `/srv/workspace/Cad`, gren `main` — **utgör det kanoniska hemmet** och har
+  committats + pushats till `github.com/svarkor-ai/Cad` (commit `6e035d6` och därefter
+  `e…`). Denna text är den kanoniska `README.md`. All kod (cad/, server/, tests/) + docs
+  ligger på main. Inget av arbetsmapparna in under `/srv/workspace/svarkor-cad-*` hör hemma
+  i repot — de är källan artefakterna.
+
+## Hur man använder — CLI och web
+
+Beroenden: `pip install -r requirements.txt` (cadquery/OCCT krävs för IGES/STEP/BREP).
+
+**Kommandorad (cadconv):**
+    python cli.py --list-formats
+    python cli.py min_fil.step --to stl -o min_fil.stl
+    python cli.py min_fil.iges --to brep
+    (inuttag: step/iges/brep — uttag: step/brep/svg/iges/stl/obj/3mf/gltf/ply)
+
+**Webbgränssnitt (drag-drop):**
+    uvicorn server.api:app --host 127.0.0.1 --port 8000
+    # öppna http://127.0.0.1:8000 — dra en CAD-fil, välj utformat, konvertera.
+
+API:t serverar GET / (gränssnittet), GET /formats och POST /convert (multipart:
+file, format, tolerance?).
 
 ---
 
