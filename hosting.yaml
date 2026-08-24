@@ -1,0 +1,12 @@
+{
+  "_comment": [
+    "vm106 hosting config for svarkor-ai/cad -- MC#2317. Strict JSON (no yaml lib; comments only here).",
+    "FastAPI (server/api.py:app). exec=serve.py binds 0.0.0.0:8125 (serve.py, not server.py, to avoid the server/ package clash).",
+    "requirements.txt pin-fixed (dropped uvicorn[standard] extra + inline # comments). RUNTIME: cadquery/OCP need libGL.so.1 on vm106 (apt-get install -y libgl1)."
+  ],
+  "name": "cad",
+  "type": "service",
+  "root": "apps/cad",
+  "exec": "serve.py",
+  "port": 8125
+}
