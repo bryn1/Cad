@@ -1,0 +1,28 @@
+# cad (MC 422.9, cad-mesh) — Python 3.11 target deps (DESIGN.md r1, §2)
+# trimesh pinned 5.0.0: researcher compat-check against cadquery 2.8.0 + numpy 2.4.6
+# on py3.11 PASSED (import + all 5 export formats real-file verified in cadspike deps
+# target). The 3mf exporter needs networkx + lxml (trimesh optional deps); pinning
+# them here so all five C4 mesh formats (stl/obj/3mf/gltf/ply) really write.
+cadquery==2.8.0
+numpy==2.4.6
+trimesh==5.0.0   # C4 mesh path — the ONLY trimesh user (invariant C4)
+networkx==3.6.1  # optional trimesh dep, required by the 3mf/exchange exporters
+lxml==6.1.2      # optional trimesh dep, required by the 3mf exporter
+
+# --- cad-api (MC 422.15/494.1, C8 web shell) — FastAPI surface over the cad registry ---
+# api.py owns none of the conversion logic; it routes + gates the upload boundary
+# + temp-plumbs into cad.formats.convert / cad.importers.load.
+# 494.1 hardening (sigrid 422.22): bump the pinned VULNERABLE web layer.
+#   - python-multipart 0.0.9 -> 0.0.32 : closes PYSEC-2026-3039/3038/1851 (multipart
+#     parse DoS, HIGH) plus the rest of the 0.0.9 batch. >=0.0.31 is the required floor.
+#   - fastapi/starlette -> fastapi 0.141.1 + starlette 1.6.0 : closes the starlette
+#     HIGH/MED cluster. NOTE: the first attempt landed fastapi 0.117.0 + starlette 0.48.0
+#     (>=0.47.2), but pip-audit still reported 8 starlette CVEs (161/248/249/1942/2280/
+#     2281) there. Their strictest fixes are 1.0.1/1.3.0/1.3.1/0.49.1/1.1.0 — i.e. only a
+#     starlette>=1.3.1 pin clears ALL of them. fastapi 0.117..0.130 cap starlette<1.0.0;
+#     fastapi>=0.135 relaxes to starlette>=0.46 with no upper bound, so THIS pair is the
+#     minimal lift that is pip-audit-clean for the web layer (pip-audit: 0 known vulns).
+fastapi==0.141.1
+starlette==1.6.0   # >=1.3.1 clears the entire remaining starlette batch (verified pip-audit zero)
+uvicorn[standard]==0.30.1
+python-multipart==0.0.32   # >=0.0.31 (fix) — closes the 0.0.9 multipart DoS family
