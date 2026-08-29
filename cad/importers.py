@@ -5,7 +5,8 @@ into the ONE core BRep (cad.brep.BRep, I1). It resolves the format from the file
 extension when not given, then dispatches to the reader registered for that format.
 
     def load(path, fmt=None) -> BRep          # fmt from extension when None
-    def supported_inputs() -> list[str]       # ['brep','iges','step']
+    def supported_inputs() -> list[str]       # ['step','iges','brep']
+    def resolve_input_format(name) -> str     # '.stp'->'step', '.igs'->'iges' (spellings)
 
 Reader dispatch (internal register ``_READERS: dict[fmt, Callable[[str], BRep]]``):
     step/brep -> CadQuery importers.importShape (wrapped into a BRep)
@@ -68,6 +69,34 @@ def supported_inputs() -> list:
     return list(_READERS)
 
 
+# Common file-extension SPELLINGS of a supported input format. The web UI's file picker
+# advertises `.stp` and `.igs` (server/web.py `accept=`), and CAD tools write them at least
+# as often as the long forms -- so they must resolve to the reader they name, not 415.
+# Keys are registry names in _READERS; these are spellings, not new formats, so
+# supported_inputs() stays exactly the registry.
+INPUT_ALIASES: Dict[str, str] = {
+    "stp": "step",
+    "igs": "iges",
+}
+
+
+def resolve_input_format(name_or_ext: str) -> str:
+    """Return the registry input format for a filename, extension or format string.
+
+    ``"box.stp"`` / ``".STP"`` / ``"stp"`` -> ``"step"``; ``"model.igs"`` -> ``"iges"``;
+    a registry name passes through lower-cased. Unknown spellings are returned as-is
+    (lower-cased) so the caller's own UnsupportedFormatError names what it saw.
+    """
+    if not isinstance(name_or_ext, str):
+        raise TypeError(f"resolve_input_format expects a string, got {type(name_or_ext).__name__}")
+    s = name_or_ext
+    if "." in s:
+        tail = os.path.splitext(s)[1]   # '.stp' for 'box.stp'; '' for a bare '.stp'
+        s = tail or s
+    s = s.lstrip(".").lower()
+    return INPUT_ALIASES.get(s, s)
+
+
 def load(path: str, fmt: str | None = None) -> BRep:
     """Load a CAD file into the core BRep (C2; C7 errors).
 
@@ -84,10 +113,9 @@ def load(path: str, fmt: str | None = None) -> BRep:
     path = os.fspath(path)
 
     if fmt is None:
-        # resolve the format from the extension (.step /.STEP / .iges ...)
-        ext = os.path.splitext(path)[1]
-        fmt = ext[1:] if ext.startswith(".") else ext
-    fmt = fmt.lower()
+        # resolve the format from the extension (.step /.STEP / .stp / .iges / .igs ...)
+        fmt = resolve_input_format(os.path.splitext(path)[1])
+    fmt = resolve_input_format(fmt)
 
     if fmt not in _READERS:
         raise UnsupportedFormatError(

@@ -40,7 +40,7 @@ from fastapi.responses import JSONResponse, Response
 from cad import CadError, ConversionError, ParseError, UnsupportedFormatError
 from cad import convert as _convert
 from cad import load as _load
-from cad import available_formats, supported_inputs
+from cad import available_formats, resolve_input_format, supported_inputs
 
 app = FastAPI(title="cad-api", version="0.1.0", description=__doc__)
 
@@ -222,8 +222,9 @@ async def convert(
 
     # 2) Resolve the input format from the safe basename's extension early so an
     #    unsupported source format is a clean 415, not a mid-pipeline surprise.
-    ext = os.path.splitext(safe_name)[1].lower()
-    src_fmt = ext[1:] if ext.startswith(".") else ext
+    #    The SAME resolver load() uses, so `.stp`/`.igs` (which the UI's file picker
+    #    accepts) reach the step/iges readers instead of a 415 for a spelling.
+    src_fmt = resolve_input_format(safe_name)
     if src_fmt not in supported_inputs():
         raise UnsupportedFormatError(
             f"Unsupported input format '{src_fmt}'; supported: {', '.join(supported_inputs())}"
