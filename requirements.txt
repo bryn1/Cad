@@ -1,4 +1,4 @@
-# MC#2317 pin-fix for svarkor-ai/cad -- exact pins only (vm106 build gate rejects the uvicorn[standard]
+# MC#2317 pin-fix for bryn1/cad -- exact pins only (vm106 build gate rejects the uvicorn[standard]
 # extra and inline # comments after a pin). Versions preserved from the repo's requirements.txt.
 # RUNTIME: cadquery/OCP import libGL.so.1 -> vm106 needs `apt-get install -y libgl1`.
 cadquery==2.8.0

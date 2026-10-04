@@ -1,4 +1,4 @@
-"""server — the C8 web shell package (svarkor-ai/Cad, cad-api).
+"""server — the C8 web shell package (bryn1/Cad, cad-api).
 
 DESIGN.md r1: the FastAPI HTTP surface wraps the cad library. It owns routing,
 multipart decoding, the upload-boundary filename-safety gate (sigrid 422.21 LOW:

@@ -1,4 +1,4 @@
-# CAD-filkonverterare (svarkor-ai/Cad) — projekt-README
+# CAD-filkonverterare (bryn1/Cad) — projekt-README
 
 > Skriven av Mirre (doc) — MC 530.5, 2026-08-24T0940 UTC — **från landade
 > artefakter**. Detta är en SUPERSEDE av fas-3-README

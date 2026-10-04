@@ -22,7 +22,7 @@ OCCT via CadQuery 2.x (Python). Bygget ska ha CLI + enkelt webbgränssnitt (drag
 - A2. Drivs på beprövad motor: OCCT via CadQuery, + trimesh för mesh-vägen.
 - A3. CLI + enkelt webbgränssnitt (dra-och-släpp).
 - A4. Verifierad av dobbie med verkligt build+test, ej "ser bra ut".
-- A5. Push till github.com/svarkor-ai/Cad vid varje milstolpe (repo just nu TOMT — greenfield).
+- A5. Push till github.com/bryn1/Cad vid varje milstolpe (repo just nu TOMT — greenfield).
 
 ### Testbar acceptance för DENNA plan-kort (vad T1 levererar)
 - P1. PLAN.md listar alla moduler, i ordning, med "modul -> ansvar" (denna fil).
@@ -100,7 +100,7 @@ motormodulen — den får eget scope i planen, inte dolt.
   ett recall-index, inte bevis på frånvaro; flaggat.)
 - Prior-plan-kort i samma kedjetyp (hotell 142.1, kvällsmats 166.1) är FORMAT-mallar, inget
   återanvändbart bibliotek för CAD. REUSE formatet; inte innehållet.
-- Repo svarkor-ai/Cad = TOMT (LEDGER, VERIFIERAD). Inga specs att återanvända.
+- Repo bryn1/Cad = TOMT (LEDGER, VERIFIERAD). Inga specs att återanvända.
 
 --------------------------------------------------------------------------------
 ## 4. INPUT/OUTPUT-MATRIS (per mål-format; uttömmer A1)
@@ -205,7 +205,7 @@ separat handler-post, inte dras in i mesh-vägen. MITIGERING: registret har tydl
 format->handler-typ per väg (B-rep | mesh | vector); verifierat av T3.
 
 ROLLBACK: greenfield => ingen gammal funktion att bryta. "Rollback" = att INTE merge:a en
-modul som missar DoD; varje modul är en separat commit/branch mot svarkor-ai/Cad (A5 pushar
+modul som missar DoD; varje modul är en separat commit/branch mot bryn1/Cad (A5 pushar
 per milstolpe), så en dålig modul droppas utan att skada resten. Inget live-state, inga
 secrets, ingen production.
 

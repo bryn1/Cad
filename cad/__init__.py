@@ -1,4 +1,4 @@
-"""cad — the CAD-file converter package (svarkor-ai/Cad).
+"""cad — the CAD-file converter package (bryn1/Cad).
 
 Module seed (MC 422.1, cad-core): exposes the ONE core B-rep representation.
 MC 422.7 (cad-iges): adds the IGES import/export adapter (C5) and the C7

@@ -1,4 +1,4 @@
-# CAD-filkonverterare (svarkor-ai/Cad) — projekt-README
+# CAD-filkonverterare (bryn1/Cad) — projekt-README
 
 > Skriven av Mirre (doc) — MC 530.5, 2026-08-24T0940 UTC — **från landade
 > artefakter**. Detta är en SUPERSEDE av fas-3-README
@@ -243,7 +243,7 @@ IGES), inte en regression. Se "[Ärligt begränsade]" ovan.
 ## Repo-/landningsstatus (per granskning 2026-08-24T0940 UTC)
 
 - Repo: `/srv/workspace/Cad`, gren `main` — **utgör det kanoniska hemmet** och har
-  committats + pushats till `github.com/svarkor-ai/Cad` (commit `6e035d6` och därefter
+  committats + pushats till `github.com/bryn1/Cad` (commit `6e035d6` och därefter
   `e…`). Denna text är den kanoniska `README.md`. All kod (cad/, server/, tests/) + docs
   ligger på main. Inget av arbetsmapparna in under `/srv/workspace/svarkor-cad-*` hör hemma
   i repot — de är källan artefakterna.

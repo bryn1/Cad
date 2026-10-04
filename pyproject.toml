@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "cad"
 version = "0.1.0"
-description = "CAD-file converter (svarkor-ai/Cad) — B-rep core + IGES + B-rep/vector + mesh output + registry dispatch + FastAPI web shell (cad-api C8)"
+description = "CAD-file converter (bryn1/Cad) — B-rep core + IGES + B-rep/vector + mesh output + registry dispatch + FastAPI web shell (cad-api C8)"
 requires-python = ">=3.11"
 dependencies = [
     "cadquery>=2.8.0",

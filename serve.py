@@ -1,4 +1,4 @@
-"""vm106 hosting entrypoint for svarkor-ai/cad (MC#2317).
+"""vm106 hosting entrypoint for bryn1/cad (MC#2317).
 
 The vm106 renderer runs `python serve.py` with NO PORT env; nginx proxies
 sibbamala.com/cad/ -> 127.0.0.1:8125. server/api.py only DEFINES the ASGI `app`;

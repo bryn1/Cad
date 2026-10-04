@@ -9,10 +9,10 @@ Ett verktyg som tar en 3D-industriell CAD-fil (t.ex. STEP) och konverterar till 
 - [ ] Driver på beprövad motor (OCCT via CadQuery, + trimesh för mesh-vägen)
 - [ ] CLI + enkelt webbgränssnitt (dra-och-släpp)
 - [ ] Verifierad av dobbie med verkligt build+test, ej "ser bra ut"
-- [ ] Push till github.com/svarkor-ai/Cad vid varje milstolpe
+- [ ] Push till github.com/bryn1/Cad vid varje milstolpe
 
 ## Repo-status (2026-08-22)
-- svarkor-ai/Cad = TOMT (greenfield). Inga specs.
+- bryn1/Cad = TOMT (greenfield). Inga specs.
 
 ## Engine-spike (svarkor, VERIFIERAD 2026-08-22)
 - CadQuery 2.x / OCCT fungerar i miljön (Python 3.11 venv)

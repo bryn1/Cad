@@ -37,7 +37,7 @@ MUST HOLD (invariants that must never break — every module obeys these):
       REUSED as-is (verified working), trimesh and all app modules are NEW.
 
 CONSTRAINTS (fixed points — do not violate in phase 2):
-- C-1. Repo: github.com/svarkor-ai/Cad ; local code root /srv/workspace/Cad (greenfield,
+- C-1. Repo: github.com/bryn1/Cad ; local code root /srv/workspace/Cad (greenfield,
        VERIFIED empty except LEDGER + sickan/).
 - C-2. Engine (VERIFIED in /tmp/cadspike this session + 398.1): CadQuery 2.8.0 / OCP
        OCCT 7.9.3.1.1, numpy 2.4.6. Exports verified working: STEP, STL, BREP, 3MF, SVG.
@@ -217,7 +217,7 @@ R3 (MED): per-format options (GLTF draco, 3MF variants). MITIGATION: v1 = simple
 R4 (LOW): SVG is a vector path, not mesh — must be a separate registry handler. MITIGATION:
    C3 handles SVG in exporters, registry tags handler-type (PLAN R4) — neo verifies.
 ROLLBACK: greenfield — nothing to break. Each module = separate commit/branch on
-   svarkor-ai/Cad (A5 pushes per milestone); a module missing DoD is dropped without
+   bryn1/Cad (A5 pushes per milestone); a module missing DoD is dropped without
    hurting the rest. No live state, no secrets, no production.
 SIGN-OFF (owner/orchestrator, surfaced by T1 as SO-1..SO-3, carry forward):
    SO-1 IGES in phase-1 scope (recommend YES, IGES-UT stretch acceptable) — the design is
@@ -328,7 +328,7 @@ MODULE TASK BREAKDOWN:
 
 PROJECT-level phase-2 delivery (transcribed by svarkor, not a build module above):
 - verify.sh authored per module from that module's DoD (deterministic-verdict shape).
-- push to github.com/svarkor-ai/Cad per milestone (A5).
+- push to github.com/bryn1/Cad per milestone (A5).
 
 ================================================================================
 ## 8. CONFIDENCE
